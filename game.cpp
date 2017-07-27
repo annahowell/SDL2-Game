@@ -14,10 +14,11 @@ Game::Game(SDL_Renderer* renderer, const int& SCREEN_WIDTH, const int& SCREEN_HE
     background = new Background(renderer, SCREEN_WIDTH, SCREEN_HEIGHT, "bg1.png", "bg2.png", "bg3.png");
     
     // Create ship rect, ship texture and bind texture to a new particle for ship.
+    angle = M_PI * 1.5;
     SDL_Rect shipOR = {0, 0, 64, 64};
-    Texture* shipT = new Texture(renderer, "ship.png", shipOR);
-    shipP = new Particle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0, 0, 0.99, 0, shipT);
-    
+    Texture *shipT = new Texture(renderer, "ship.png", shipOR);
+    shipP = new Particle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0, angle, 0.99, 0, shipT);
+
     runGame();
 }
 
@@ -67,8 +68,11 @@ void Game::getEvents()
     // If right key is pressed
     if( currentKeyStates[SDL_SCANCODE_RIGHT])
     {
-        angle += 0.075;
-        newShipHeading = true;
+        turningRight = true;
+    }
+    else
+    {
+        turningRight = false;
     }
     
     // If the down key is pressed
@@ -84,8 +88,11 @@ void Game::getEvents()
     // If left key is pressed
     if( currentKeyStates[SDL_SCANCODE_LEFT])
     {
-        angle -= 0.075;
-        newShipHeading = true;
+        turningLeft = true;
+    }
+    else
+    {
+        turningLeft = false;
     }
 }
 
@@ -95,7 +102,7 @@ void Game::getEvents()
 
 void Game::getCollisions()
 {
-    colDet->wrap(shipP, 32);
+    colDet->bounce(shipP, 32);
 }
 
 
@@ -104,35 +111,41 @@ void Game::getCollisions()
 
 void Game::render()
 {
-    if (newShipHeading)
+    // Clear the window
+    SDL_RenderClear(renderer);
+    
+    // Set offset of background and draw it
+    //background->setYoffsets(3, 5, 7, 0);
+    //background->render();
+    
+    if(turningRight)
     {
-        shipP->setHeading(angle);
-        newShipHeading = false;
+        angle += 0.05;
     }
+    
+    if(turningLeft)
+    {
+        angle -= 0.05;
+    }
+    
+    shipP->setTheading(angle);
     
     if (thrusting)
     {
         shipP->accelerate(0.2);
     }
- 
-    if (braking)
-    {
-        shipP->brake(0.96);
-    }
     else
     {
-        shipP->brake(0.99);
+        shipP->accelerate(0);
     }
     
-    // Clear the window
-    SDL_RenderClear(renderer);
-    
-    // Set offset of background and draw it
-    background->setHorizontalOffsets(-3, -5, -7, 0);
-    background->render();
+    //shipP->accelerate();
     
     // Draw ship
     shipP->update();
+
+    
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
     // Render the changes above
     SDL_RenderPresent(renderer);

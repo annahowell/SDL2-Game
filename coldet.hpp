@@ -13,7 +13,7 @@ private:
     
 public:
     ColDet();
-    ColDet(const int SCREEN_WIDTH, const int SCREEN_HEIGHT);
+    ColDet(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT);
     
     void wrap(Particle *p, const float& halfTheSize);
     void recycle(Particle *p, const float& halfTheSide, const int& x, const int& y);

@@ -41,7 +41,7 @@ Background::Background(SDL_Renderer *renderer, const int &SCREEN_WIDTH, const in
  @param renderer      Renderer to send the texture to
  @param SCREEN_WIDTH  The total width of the screen
  @param SCREEN_HEIGHT The total height of the screen
- @param file1         The filename of the first image, used for the ottom layer of the background
+ @param file1         The filename of the first image, used for the bottom layer of the background
  @param file2         The filename of the second image, used for the middle layer of the background
  @param file3         The filename of the third image, used for the top layer of the background
  */
@@ -72,7 +72,7 @@ Background::Background(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIG
  @param renderer      Renderer to send the texture to
  @param SCREEN_WIDTH  The total width of the screen
  @param SCREEN_HEIGHT The total height of the screen
- @param file1         The filename of the first image, used for the ottom layer of the background
+ @param file1         The filename of the first image, used for the bottom layer of the background
  @param file2         The filename of the second image, used for the middle-bottom layer of the background
  @param file3         The filename of the third image, used for the middle-top layer of the background
  @param file4         The filename of the fourth image, used for the top layer of the background
@@ -102,7 +102,7 @@ Background::Background(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIG
  @param bgOffset3  The amount of offset to apply to the third (middle-top) layer of the background
  @param bgOffset4  The amount of offset to apply to the fourth (top) layer of the background
  */
-void Background::setHorizontalOffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
+void Background::setXoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
 {
     // If the background has been moved
     if (bgOffset1 != 0)
@@ -213,7 +213,7 @@ void Background::setHorizontalOffsets(int bgOffset1, int bgOffset2, int bgOffset
  @param bgOffset3  The amount of offset to apply to the third (middle-top) layer of the background
  @param bgOffset4  The amount of offset to apply to the fourth (top) layer of the background
  */
-void Background::setVerticalOffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
+void Background::setYoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
 {
     if (bgOffset1 != 0)
     {

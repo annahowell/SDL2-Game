@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2_gfx/SDL2_gfxPrimitives.h>
+#include <cmath>
 #include "particle.hpp"
 #include "texture.hpp"
 #include "background.hpp"
@@ -14,15 +15,13 @@ class Game
 private:
     SDL_Renderer* renderer;
     
-    Texture *shipT, *backgroundT1a, *backgroundT1b, *backgroundT2a, *backgroundT2b, *backgroundT3a, *backgroundT3b, *backgroundT4a, *backgroundT4b;
     Particle *shipP;
     ColDet *colDet;
     Background *background;
     
     float angle = 0;
-    bool playing, quit, newShipHeading, thrusting, braking;
+    bool playing, quit, newShipHeading, thrusting, braking, turningRight, turningLeft;
     const int SCREEN_WIDTH, SCREEN_HEIGHT;
-    int backgroundOffset1 = 0, backgroundOffset2 = 0, backgroundOffset3 = 0, backgroundOffset4 = 0;
     const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
     
     void runGame();
