@@ -20,7 +20,7 @@ Simple SDL2 asteroids type top-down 2D game, created to learn C++, SDL2 and more
 
 ### MacOS
 
-1. Install brew and then run `brew install sdl2 sdl2_gfx sdl2_image` (The FindSDL2* files in the included cmake folder should find the sdl2 files in the /usr/local/Cellar/ folders).
+1. Install brew and then run `brew install sdl2 sdl2_gfx sdl2_image cmake` (The FindSDL2* files in the included cmake folder should find the sdl2 files in the /usr/local/Cellar/ folders).
 
 2. Run the following commands at the commandline:  
 `mkdir build `   
