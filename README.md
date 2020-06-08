@@ -41,6 +41,6 @@ Additional thanks to [aminosbh](https://github.com/aminosbh) for their sdl2 cmak
 
 ## Screenshots
 
-![GameMov](https://github.com/annahowell/SDL2_Game/blob/master/screenshots/SDL2_Game.webp)
+![GameMov](https://github.com/annahowell/SDL2-Game/blob/master/screenshots/SDL2_Game.webp)
 
-![GameStill](https://github.com/annahowell/SDL2_Game/blob/master/screenshots/SDL2_Game.jpg)
+![GameStill](https://github.com/annahowell/SDL2-Game/blob/master/screenshots/SDL2_Game.jpg)
