@@ -41,5 +41,7 @@ int main( int argc, char* args[] )
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     }
 
-    Game(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Game* game = new Game(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    game->runGame();
 }

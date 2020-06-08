@@ -81,17 +81,17 @@ float Particle::getVelocityY() { return velocityY; }
 
 
 /** --------------------------------------------------------------------------------------
- Sets a new heading for the particle
+ Sets a new heading for the particle by applying an offset in degrees
 
- @param radianOffset The amount of offset to apple to the current radian value
+ @param degreeOffset Amount of offset to apply to the heading in degrees
  */
- void Particle::setHeading(float radianOffset)
+ void Particle::setHeading(float degreeOffset)
 {
-    texture->setAngleInRadians(radianOffset);
+    texture->setAngleByDegrees(degreeOffset);
 
     float speed = sqrt(velocityX * velocityX + velocityY * velocityY);
-    velocityX = cosf(radianOffset) * speed;
-    velocityY = sinf(radianOffset) * speed;
+    velocityX = cosf(degreeOffset) * speed;
+    velocityY = sinf(degreeOffset) * speed;
 }
 
 

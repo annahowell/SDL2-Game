@@ -14,8 +14,8 @@ private:
     SDL_Rect outputRect1a, outputRect1b, outputRect2a, outputRect2b, outputRect3a, outputRect3b, outputRect4a, outputRect4b;
 
     std::string file1, file2, file3, file4;
-    const int SCREEN_WIDTH, SCREEN_HEIGHT;
-    int layers;
+    int SCREEN_WIDTH, SCREEN_HEIGHT;
+    int textures;
 
 public:
     Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1);

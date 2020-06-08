@@ -21,8 +21,8 @@ public:
     Texture(SDL_Renderer* renderer, std::string path, SDL_Rect &rect, int centerX, int centerY);
     Texture(SDL_Renderer* renderer, std::string path, SDL_Rect &rect);
 
-    void setAngleInDegrees(float angle);
-    void setAngleInRadians(float angle);
+    void setAngleByDegrees(float degrees);
+    void setAngleByRadians(float radians);
     void scroll(int xOffset, int yOffset);
     void setLocation(float x, float y);
     void render();

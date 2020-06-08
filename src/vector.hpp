@@ -26,7 +26,7 @@ public:
     void setLength(float length);
     float getLength();
 
-    void setPositionByAngleInDegrees(float angle);
+    void setPositionByAngleInDegrees(float degrees);
     float getPositionByAngleInDegrees();
 
     void add(Vector &v2);

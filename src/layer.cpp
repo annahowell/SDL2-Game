@@ -1,7 +1,7 @@
 #include "layer.hpp"
 
 /** --------------------------------------------------------------------------------------
- Construct a layer consisting of a single image
+ Construct a layer consisting of a single texture
 
  @param renderer      Renderer to send the texture to
  @param SCREEN_WIDTH  The total width of the screen
@@ -11,8 +11,8 @@
 Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1)
     : renderer(renderer), SCREEN_WIDTH(SCREEN_WIDTH), SCREEN_HEIGHT(SCREEN_HEIGHT)
 {
-    // Layer has 1 layer
-    layers = 1;
+    // Layer has 1 texture
+    textures = 1;
 
     // Create output rectangle, 2 rectangles per layer, that each have the same texture
     // Second fills screen entirely as first is reset and first fills screen entirely as
@@ -32,7 +32,7 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 
 
 /** --------------------------------------------------------------------------------------
- Construct a layer consisting of two images
+ Construct a layer consisting of two textures
 
  @param renderer        Renderer to send the texture to
  @param SCREEN_WIDTH    The total width of the screen
@@ -43,8 +43,8 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1, std::string file2)
     : Layer (renderer, SCREEN_WIDTH, SCREEN_HEIGHT, file1)
 {
-    // This layer has 3 layers
-    layers = 2;
+    // This layer has 2 textures
+    textures = 2;
 
     // So it needs 2 additional output rectangles for that layer
     outputRect2a = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -62,7 +62,7 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 
 
 /** --------------------------------------------------------------------------------------
- Constructs a layer consisting of three images
+ Constructs a layer consisting of three textures
 
  @param renderer        Renderer to send the texture to
  @param SCREEN_WIDTH    The total width of the screen
@@ -74,7 +74,7 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1, std::string file2, std::string file3)
     : Layer (renderer, SCREEN_WIDTH, SCREEN_HEIGHT, file1, file2)
 {
-    layers = 3;
+    textures = 3;
 
     outputRect3a = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     outputRect3b = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -89,7 +89,7 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 
 
 /** --------------------------------------------------------------------------------------
- Constructs a layer consisting of four images
+ Constructs a layer consisting of four textures
 
  @param renderer        Renderer to send the texture to
  @param SCREEN_WIDTH    The total width of the screen
@@ -102,7 +102,7 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1, std::string file2, std::string file3, std::string file4)
     : Layer (renderer, SCREEN_WIDTH, SCREEN_HEIGHT, file1, file2, file3)
 {
-    layers = 4;
+    textures = 4;
 
     outputRect4a = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     outputRect4b = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -128,41 +128,42 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
  */
 void Layer::setXoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
 {
-    // If the layer has been moved
+    // If the texture has been moved
     if (bgOffset1 != 0)
     {
-        // Move the primary layer image on this layer by specified amount, either
-        // negatively(left) or positively(right)
+        // Move the primary texture rect of this texture by the specified amount, either
+        // negatively (left) or positively (right)
         outputRect1a.x += bgOffset1;
 
-        // If the layer is being moved by a negative value (to the left)
+        // If the texture is being moved by a negative value (to the left)
         if (bgOffset1 < 0)
         {
             // After negative (to left) offset is done, test to see if the right edge of
-            // the first image is off the screen
+            // the first texture rect is off the screen
             if (outputRect1a.x + SCREEN_WIDTH < 0)
             {
                 // If it is then add the width of the screen to the value, essentially
                 // resetting its position
                 outputRect1a.x += SCREEN_WIDTH;
             }
-            // We're using a negative value (moving image left) so the second image needs
+            // We're using a negative value (moving rect left) so the second rect needs
             // to come in from the right
             outputRect1b.x = (outputRect1a.x + SCREEN_WIDTH);
         }
-        // Otherwise the layer is being moved by a positive value (to the right)
+        // Otherwise the texture is being moved by a positive value (to the
+        // right)
         else
         {
             // After positive (to right) offset is done, test to see if the left edge of
-            // the first image is off the screen
+            // the first texture rect is off the screen
             if (outputRect1a.x > SCREEN_WIDTH)
             {
                 // If it is then subtract the width of the screen from the value,
                 // essentially resetting its position
                 outputRect1a.x -= SCREEN_WIDTH;
             }
-            // We're using a positive value (moving image right) so the second image needs
-            // to come in from the left
+            // We're using a positive value (moving texture rect right) so the second rect
+            // needs to come in from the left
             outputRect1b.x = (outputRect1a.x - SCREEN_WIDTH);
         }
     }
@@ -236,14 +237,14 @@ void Layer::setXoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffse
 
 
 /**
- Increment the vertical offsets for each layer. Always accepts 4 integers, 0 if layer
+ Increment the vertical offsets for each layer. Always accepts 4 integers, 0 if texture
  doesn't exist or isn't required to move. Accepts both positve and negative values.
- Negative moves the image up, positive moves the image down.
+ Negative moves the texture up, positive moves the texture down
 
- @param bgOffset1  Vertical offset to apply to first (bottom) image of the layer
- @param bgOffset2  Vertical offset to apply to second (middle-bottom) image of the layer
- @param bgOffset3  Vertical offset to apply to third (middle-top) image of the layer
- @param bgOffset4  Vertical offset to apply to fourth (top) image of the layer
+ @param bgOffset1  Vertical offset to apply to first (bottom) texture of the layer
+ @param bgOffset2  Vertical offset to apply to second (middle-bottom) texture of the layer
+ @param bgOffset3  Vertical offset to apply to third (middle-top) texture of the layer
+ @param bgOffset4  Vertical offset to apply to fourth (top) texture of the layer
  */
 void Layer::setYoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4)
 {
@@ -339,24 +340,24 @@ void Layer::setYoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffse
 
 
 /** --------------------------------------------------------------------------------------
- Render the layer with two, three or four layers.
+ Render the layer with one, two, three or four textures.
  */
 void Layer::render()
 {
     SDL_RenderCopy(renderer, bg1, nullptr, &outputRect1a);
     SDL_RenderCopy(renderer, bg1, nullptr, &outputRect1b);
 
-    if (layers > 1)
+    if (textures > 1)
     {
         SDL_RenderCopy(renderer, bg2, nullptr, &outputRect2a);
         SDL_RenderCopy(renderer, bg2, nullptr, &outputRect2b);
 
-        if (layers > 2)
+        if (textures > 2)
         {
             SDL_RenderCopy(renderer, bg3, nullptr, &outputRect3a);
             SDL_RenderCopy(renderer, bg3, nullptr, &outputRect3b);
 
-            if (layers > 3)
+            if (textures > 3)
             {
                 SDL_RenderCopy(renderer, bg4, nullptr, &outputRect4a);
                 SDL_RenderCopy(renderer, bg4, nullptr, &outputRect4b);

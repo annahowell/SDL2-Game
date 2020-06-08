@@ -39,11 +39,11 @@ float Vector::getY() { return y; }
 
  @param angle   New angle in degrees
  */
-void Vector::setPositionByAngleInDegrees(float angle)
+void Vector::setPositionByAngleInDegrees(float degrees)
 {
     float length = getLength();
-    x = cos(angle) * length;
-    y = sin(angle) * length;
+    x = cos(degrees) * length;
+    y = sin(degrees) * length;
 }
 
 
@@ -142,7 +142,7 @@ Vector Vector::subtractFrom(Vector &v2)
 
 
 /** --------------------------------------------------------------------------------------
- Multiplies this vector by a scalar value, thus amending the current vectors head Position
+ Multiplies this vector by a scalar value, thus amending the current vectors head position
  and thereby its magnitude
 
  @params  scalar  The scalar value by which to multiple this vectors horizontal x and
@@ -173,7 +173,7 @@ Vector Vector::multiplyBy(float scalar)
 
 
 /** --------------------------------------------------------------------------------------
- Divides this vector by a scalar value, thus amending the current vectors head Position
+ Divides this vector by a scalar value, thus amending the current vectors head position
  and thereby its magnitude
 
  @params  scalar  The scalar value by which to divide this vectors horizontal x and

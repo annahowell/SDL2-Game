@@ -43,11 +43,12 @@ Texture::Texture(SDL_Renderer* renderer, std::string path, SDL_Rect &rect)
 /** --------------------------------------------------------------------------------------
  Sets the angle of the texture in degrees
 
- @param angle   Angle in human-friendly degrees
+ @param degrees   Angle in human-friendly degrees
  */
-void Texture::setAngleInDegrees(float angle)
+void Texture::setAngleByDegrees(float degrees)
 {
-    this->angle = angle;
+    // Angle of texture is in radians so convert from degrees to radians
+    this->angle = degrees * (180.0 / M_PI);
 }
 
 
@@ -55,11 +56,11 @@ void Texture::setAngleInDegrees(float angle)
 /** --------------------------------------------------------------------------------------
  Sets the angle of the texture in radians
 
- @param angle   Angle in human-friendly degrees
+ @param angle   Angle in radians
  */
-void Texture::setAngleInRadians(float angle)
+void Texture::setAngleByRadians(float radians)
 {
-    this->angle = angle * (180.0 / M_PI);
+    this->angle = radians;
 }
 
 
@@ -93,7 +94,7 @@ void Texture::setLocation(float x, float y)
 
 
 /** --------------------------------------------------------------------------------------
- Copies the texture to the render and in so doing making it visibile on screen
+ Copies the texture to the render and in so doing makes it visibile on screen
 
  */
 void Texture::render()

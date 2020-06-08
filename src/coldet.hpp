@@ -9,11 +9,11 @@
 class ColDet {
 
 private:
-    const int SCREEN_WIDTH, SCREEN_HEIGHT;
+    int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 public:
     ColDet();
-    ColDet(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT);
+    ColDet(int SCREEN_WIDTH, int SCREEN_HEIGHT);
 
     void wrapScreen(Particle *p, const float& midPoint);
     void bounceScreen(Particle *p, const float& midPoint);

@@ -28,7 +28,7 @@ public:
     void setVelocityX(float velocityX);
     void setVelocityY(float velocityY);
 
-    void setHeading(float radianOffset);
+    void setHeading(float degreeOffset);
     void accelerate(float speed);
     void accelerate();
 

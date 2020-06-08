@@ -18,16 +18,16 @@ class Game
 private:
     SDL_Renderer* renderer;
 
-    Particle *shipP;
+    Particle *ship;
     ColDet *colDet;
     Layer *background, *foreground;
 
     float angle = 0;
     bool quit, thrusting, braking, turningRight, turningLeft;
-    int &SCREEN_WIDTH, &SCREEN_HEIGHT;
+    int SCREEN_WIDTH, SCREEN_HEIGHT;
     const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
 
-    void runGame();
+    void createShip();
     void getEvents();
     void getCollisions();
     void render();
@@ -39,7 +39,9 @@ private:
     #endif
 
 public:
-    Game(SDL_Renderer* renderer, int &SCREEN_WIDTH, int &SCREEN_HEIGHT);
+    Game(SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT);
+
+    void runGame();
 };
 
 
