@@ -152,6 +152,4 @@ void Game::render()
 
     // Render the frame with the above changes
     SDL_RenderPresent(renderer);
-
-    SDL_Delay(16);
 }
