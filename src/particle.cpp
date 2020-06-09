@@ -150,7 +150,7 @@ float Particle::getVelocityY() { return velocityY; }
  of additional friction on the particle. Reasonable force values are 0.05 to 0.25 where
  (depending on speed) values above 0.2 will make the particle stop very quickly
 
- @param speed  Speed by which to accelerate the particle
+ @param force  Force to apply to the particle when decelerating
  */
  void Particle::decelerate(float force)
 {
