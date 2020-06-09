@@ -115,6 +115,41 @@ Layer::Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::s
 }
 
 
+/** --------------------------------------------------------------------------------------
+ Deconstructs a layer consisting of an arbitrary amount of layers
+
+ */
+
+Layer::~Layer()
+{
+    if (bg1 != nullptr)
+    {
+        SDL_DestroyTexture(bg1);
+        bg1 = nullptr;
+    }
+
+    if (bg2 != nullptr)
+    {
+        SDL_DestroyTexture(bg2);
+        bg2 = nullptr;
+    }
+
+    if (bg3 != nullptr)
+    {
+        SDL_DestroyTexture(bg3);
+        bg3 = nullptr;
+    }
+
+    if (bg4 != nullptr)
+    {
+        SDL_DestroyTexture(bg4);
+        bg4 = nullptr;
+    }
+
+    // make sure to set textures to 0 to indicate we have no textures
+    textures = 0;
+}
+
 
 /** --------------------------------------------------------------------------------------
  Increment the horizontal offsets for each layer. Always accepts 4 integers, 0 if layer

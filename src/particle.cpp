@@ -39,43 +39,73 @@ Particle::Particle(int x, int y, float speed, float heading, float friction, flo
 
 
 /** --------------------------------------------------------------------------------------
- Sets the position of the particle on either the horiontal x axis or the vertical y axis
+ Sets the position of the particle on the horiontal x axis
 
  @param x   New position of the particle on the horizontal x axis
- @param y   New position of the particle on the vertical y axis
  */
 void Particle::setPositionX(float x) { this->x = x; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Sets the position of the particle on the vertical y axis
+
+ @param y   New position of the particle on the vertical y axis
+ */
 void Particle::setPositionY(float y) { this->y = y; }
 
 
 
 /** --------------------------------------------------------------------------------------
- Sets the velocity of the particle on either the horiontal x axis or the vertical y axis
+ Sets the velocity of the particle on the horiontal x axis
 
  @param velocityX  New velocity of the particle on the horizontal x axis
- @param velocityY  New velocity of the particle on the vertical y axis
  */
 void Particle::setVelocityX(float velocityX) { this->velocityX = velocityX; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Sets the velocity of the particle on the vertical y axis
+
+ @param velocityY  New velocity of the particle on the vertical y axis
+ */
 void Particle::setVelocityY(float velocityY) { this->velocityY = velocityY; }
 
 
 
 /** --------------------------------------------------------------------------------------
- Gets the position of the particle on either the horiontal x axis or the vertical y axis
+ Gets the position of the particle on the horiontal x axis
 
- @returns The position of the particle on either the horizontal x or vertical y axis
+ @returns The position of the particle on either the horizontal axis
  */
 float Particle::getPositionX() { return x; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Gets the position of the particle on either the vertical y axis
+
+ @returns The position of the particle on the vertical y axis
+ */
 float Particle::getPositionY() { return y; }
 
 
 
 /** --------------------------------------------------------------------------------------
- Gets the velocity of the particle on either the horiontal x axis or the vertical y axis
+ Gets the velocity of the particle on the horizontal x axis
 
- @returns The velocity of the particle on either the horizontal x or vertical y axis
+ @returns The velocity of the particle on the horizontal x axis
  */
 float Particle::getVelocityX() { return velocityX; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Gets the velocity of the particle on the vertical y axis
+
+ @returns The velocity of the particle on the vertical y axis
+ */
 float Particle::getVelocityY() { return velocityY; }
 
 
@@ -111,6 +141,23 @@ float Particle::getVelocityY() { return velocityY; }
 
     velocityX += accelerationX;
     velocityY += accelerationY;
+}
+
+
+
+/** --------------------------------------------------------------------------------------
+ Decelerate the particles by an amount of force, which in turn translates to some amount
+ of additional friction on the particle. Reasonable force values are 0.05 to 0.25 where
+ (depending on speed) values above 0.2 will make the particle stop very quickly
+
+ @param speed  Speed by which to accelerate the particle
+ */
+ void Particle::decelerate(float force)
+{
+    float additionalFriction = 1 - force;
+
+    velocityX *= additionalFriction;
+    velocityY *= additionalFriction;
 }
 
 

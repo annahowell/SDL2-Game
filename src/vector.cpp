@@ -15,21 +15,37 @@ Vector::Vector(float x, float y)
 
 
 /** --------------------------------------------------------------------------------------
- Sets the horizontal x or vertical y position of the head of the vector (tail is at 0)
+ Sets the horizontal x position of the head of the vector (tail is at 0)
 
- @param     Horizontal x or vertical y position to set for the vectors head (tail is at 0)
+ @param     Horizontal x position to set for the vectors head (tail is at 0)
  */
 void Vector::setX(float x) { this->x = x; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Sets the vertical y position of the head of the vector (tail is at 0)
+
+ @param     Vertical y position to set for the vectors head (tail is at 0)
+ */
 void Vector::setY(float y) { this->y = y; }
 
 
 
 /** --------------------------------------------------------------------------------------
- Gets the horizontal x or vertical y position of the head of the vector (tail is at 0)
+ Gets the horizontal x position of the head of the vector (tail is at 0)
 
- @returns   Current horizontal x or vertical y position of the head of the vector
+ @returns   Current horizontal x position of the head of the vector
  */
 float Vector::getX() { return x; }
+
+
+
+/** --------------------------------------------------------------------------------------
+ Gets the vertical y position of the head of the vector (tail is at 0)
+
+ @returns   Current vertical y position of the head of the vector
+ */
 float Vector::getY() { return y; }
 
 

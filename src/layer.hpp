@@ -23,6 +23,8 @@ public:
     Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1, std::string file2, std::string file3);
     Layer(SDL_Renderer *renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, std::string file1, std::string file2, std::string file3, std::string file4);
 
+    ~Layer();
+
     void setXoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4);
     void setYoffsets(int bgOffset1, int bgOffset2, int bgOffset3, int bgOffset4);
     void render();

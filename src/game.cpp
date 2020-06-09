@@ -80,41 +80,11 @@ void Game::getEvents()
         }
     }
 
-    if (currentKeyStates[SDL_SCANCODE_UP])
-    {
-        thrusting = true;
-    }
-    else
-    {
-        thrusting = false;
-    }
+    thrusting = currentKeyStates[SDL_SCANCODE_UP];
+    braking = currentKeyStates[SDL_SCANCODE_DOWN];
 
-    if (currentKeyStates[SDL_SCANCODE_RIGHT])
-    {
-        turningRight = true;
-    }
-    else
-    {
-        turningRight = false;
-    }
-
-    if (currentKeyStates[SDL_SCANCODE_DOWN])
-    {
-        braking = true;
-    }
-    else
-    {
-        braking = false;
-    }
-
-    if (currentKeyStates[SDL_SCANCODE_LEFT])
-    {
-        turningLeft = true;
-    }
-    else
-    {
-        turningLeft = false;
-    }
+    turningRight = currentKeyStates[SDL_SCANCODE_RIGHT];
+    turningLeft = currentKeyStates[SDL_SCANCODE_LEFT];
 }
 
 
@@ -167,6 +137,11 @@ void Game::render()
     else
     {
         ship->accelerate(0);
+    }
+
+    if (braking)
+    {
+        ship->decelerate(0.075);
     }
 
     ship->update();

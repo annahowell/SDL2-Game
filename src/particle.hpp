@@ -32,6 +32,8 @@ public:
     void accelerate(float speed);
     void accelerate();
 
+    void decelerate(float braking);
+
     void update();
 
 };
