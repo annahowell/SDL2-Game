@@ -8,8 +8,8 @@
 
 int main( int argc, char* args[] )
 {
-    int SCREEN_WIDTH = 800;
-    int SCREEN_HEIGHT = 600;
+    int SCREEN_WIDTH = 1280;
+    int SCREEN_HEIGHT = 720;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 

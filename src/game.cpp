@@ -14,9 +14,12 @@ Game::Game(SDL_Renderer* renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
 {
     colDet = new ColDet(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    background = new Layer(renderer, SCREEN_WIDTH, SCREEN_HEIGHT, "images" + DS + "bg1.png", "images" + DS + "bg2.png");
+    background = new Layer(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    background->addLayer("images/bg1.png");
+    background->addLayer("images/bg2.png");
 
-    foreground = new Layer(renderer, SCREEN_WIDTH, SCREEN_HEIGHT, "images" + DS + "fg1.png");
+    foreground = new Layer(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    foreground->addLayer("images/fg1.png");
 }
 
 
@@ -112,8 +115,8 @@ void Game::render()
     // Clear the window
     SDL_RenderClear(renderer);
 
-    // Scroll the second texture (downwards) by 1 pixel
-    background->setYoffsets(0, 1, 0, 0);
+    // Scroll the second inner layer positive 1 pixel on the y axis (downwards)
+    background->offsetInnerLayer(2, 0, 1);
     background->render();
 
     // Make any modifications to the ships direction and set the new heading
@@ -146,8 +149,8 @@ void Game::render()
 
     ship->update();
 
-    // Scroll the first and only texture (right) by 1 pixel
-    foreground->setXoffsets(1, 0, 0, 0);
+    // Scroll the first inner layer positive 1 pixel on the x axis (right)
+    foreground->offsetInnerLayer(1, 1, 0);
     foreground->render();
 
     // Render the frame with the above changes
